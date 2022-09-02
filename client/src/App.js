@@ -1,21 +1,23 @@
+import React from "react";
+import {Routes, Route} from 'react-router-dom'
+
+import {AddProduct, Cart, IncomeTransaction, ListProducts, ProductDetail, Profile, Home} from './pages'
 
 function App() {
+
+  let isAdmin = false
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={isAdmin ? <IncomeTransaction/> : <Home/>}/>
+        <Route path='/product-detail' element={<ProductDetail/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/add-product' element={<AddProduct/>}/>
+        <Route path='/list-products' element={<ListProducts/>}/>
+      </Routes>
+    </>
   );
 }
 
