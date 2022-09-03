@@ -5,7 +5,7 @@ import convertRupiah from 'rupiah-format'
 import bin from './../assets/bin.png'
 
 // import { API } from '../config/api';
-import { Navbar } from './../component'
+import { Navbar } from './../components'
 
 import { carts } from '../fakeData'
 
@@ -43,7 +43,7 @@ function Cart() {
   return (
     <div className='container d-flex justify-content-center'>
       <Navbar />
-      <div className='text-red' style={{ marginTop: 90, width: '90%' }}>
+      <div className='text-red' style={{ marginTop: 120, width: '90%' }}>
 
         <div onClick={handleModal} className="modal fade" id="thanksModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div data-bs-dismiss="modal" id='modalClose'></div>

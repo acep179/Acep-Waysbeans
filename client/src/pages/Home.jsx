@@ -1,7 +1,7 @@
 import React from 'react'
 import convertRupiah from 'rupiah-format'
 
-import { Navbar, AuthModal } from '../component'
+import { Navbar, AuthModal } from '../components'
 
 import { products } from '../fakeData'
 

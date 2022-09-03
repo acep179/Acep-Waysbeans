@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 // import { useMutation, useQuery } from 'react-query';
 import convertRupiah from 'rupiah-format'
 
-import { Navbar } from './../component'
+import { Navbar } from './../components'
 // import { API } from '../config/api';
 
 import { products } from '../fakeData'
