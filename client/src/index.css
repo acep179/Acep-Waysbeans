@@ -139,9 +139,12 @@ a{
 .cart-image{
   width: 80px;
   aspect-ratio: 1/1;
-  background-size: cover;
+  background-color: var(--color-sec);
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 10px;
+  border: 1px solid var(--color-pri);
 }
 
 .cart-total{
