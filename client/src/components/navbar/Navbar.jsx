@@ -9,8 +9,8 @@ import logo from "../../assets/waysbean_logo.png"
 
 function Navbar() {
 
-  let [isLogin, setIsLogin] = useState(true)
-  let [isAdmin] = useState(true)
+  let [isLogin, setIsLogin] = useState(false)
+  let [isAdmin] = useState(false)
 
   let logout = () => {
     setIsLogin(false)
