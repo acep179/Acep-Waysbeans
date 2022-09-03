@@ -5,7 +5,7 @@ import {AddProduct, Cart, IncomeTransaction, ListProducts, ProductDetail, Profil
 
 function App() {
 
-  let isAdmin = false
+  let isAdmin = true
 
   return (
     <div className="container">

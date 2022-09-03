@@ -7,6 +7,18 @@ const transactionData = [
         status: 'Waiting Approve',
         total: 129000,
         updated_at: '3/9/22',
+        buyer: {
+            id: 2,
+            fullName: 'Muhammad Syahrul Ramdhani',
+            email: 'syahrul@mail.com',
+            password: '1234',
+            status: 'customer',
+            profile: {
+                address: 'Cianjur',
+                image: null,
+                post_code: 54321
+            }
+        },
         carts: [
             {
                 id: 1,
