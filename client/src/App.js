@@ -8,7 +8,7 @@ function App() {
   let isAdmin = false
 
   return (
-    <>
+    <div className="container">
       <Routes>
         <Route path='/' element={isAdmin ? <IncomeTransaction/> : <Home/>}/>
         <Route path='/product-detail' element={<ProductDetail/>}/>
@@ -17,7 +17,7 @@ function App() {
         <Route path='/add-product' element={<AddProduct/>}/>
         <Route path='/list-products' element={<ListProducts/>}/>
       </Routes>
-    </>
+    </div>
   );
 }
 

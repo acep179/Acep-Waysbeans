@@ -1,4 +1,4 @@
 import AuthModal from './AuthModal'
-import Navbar from './Navbar'
+import Navbar from './navbar/Navbar'
 
 export {AuthModal, Navbar}

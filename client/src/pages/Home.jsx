@@ -3,7 +3,7 @@ import convertRupiah from 'rupiah-format'
 
 import { Navbar, AuthModal } from '../component'
 
-import products from './../dataDami/productsData'
+import { products } from '../fakeData'
 
 import heroBg from './../assets/jumbotron.png'
 import { useNavigate } from 'react-router-dom'
@@ -34,7 +34,7 @@ function Home() {
       <AuthModal />
 
       <header className='mb-5' style={{ marginTop: 150 }}>
-        <img className='mx-auto d-block' src={heroBg} alt="jumbotron" width='75%' />
+        <img className='img-fluid' src={heroBg} alt="jumbotron" />
       </header>
       <main className='mx-auto text-red' style={{ width: '92%' }}>
         <h4 className='mb-5'>Let's Order</h4>
@@ -44,11 +44,12 @@ function Home() {
               <div key={item.id} className='col-3 mb-5 px-3'>
                 <div className='card bg-pink p-0 cursor-pointer' onClick={() => detailProduct(item.id)}>
                   <img src={item.img} className="card-img-top w-100 mb-2" alt={item.name} />
-                  <div className="card-body p-3">
+                  <div className="card-body">
                     <div>
-                      <h5 className="card-title mb-2 text-red">{item.title}</h5>
+                      <h5 className="card-title mb-3 text-red">{item.name}</h5>
                     </div>
                     <p className="card-text mb-2">{convertRupiah.convert(item.price)}</p>
+                    <p className="card-text mb-2">Stock: {item.qty}</p>
                   </div>
                 </div>
               </div>

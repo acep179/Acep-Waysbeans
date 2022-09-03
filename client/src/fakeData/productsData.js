@@ -9,25 +9,29 @@ const productsData = [
         id: 1,
         name: 'Ice Coffee Palm Sugar',
         price: 27000,
-        img: ethiopia
+        img: ethiopia,
+        qty: 243
     },
     {
         id: 2,
         name: 'Ice Coffee Green Tea',
         price: 31000,
-        img: guatemala
+        img: guatemala,
+        qty: 342
     },
     {
         id: 3,
         name: 'Hanami Latte',
         price: 29000,
-        img: nicaragua
+        img: nicaragua,
+        qty: 423
     },
     {
         id: 4,
         name: 'Clepon Coffee',
         price: 28000,
-        img: rwanda
+        img: rwanda,
+        qty: 234
     },
 ]
 
