@@ -7,31 +7,35 @@ import rwanda from './../assets/rwanda.png'
 const productsData = [
     {
         id: 1,
-        name: 'Ice Coffee Palm Sugar',
+        title: 'ETHIOPIA Beans',
         price: 27000,
         img: ethiopia,
-        qty: 243
+        qty: 243,
+        desc: 'Hampir semua referensi sepakat mengatakan bahwa kopi pertama kali ditemukan di Ethiopia, meskipun ada juga beberapa protes yang menyatakan bahwa Coffea arabica sebenarnya muncul pertama kali di bagian selatan Sudan. Karena para gembala Ethiopia adalah manusia pertama yang mengonsumsi kopi—walau saat itu mereka baru mengonsumsi buah/cherry-nya saja, maka gagasan tentang “Ethiopia sebagai tempat asal kopi” pun semakin kuat.'
     },
     {
         id: 2,
-        name: 'Ice Coffee Green Tea',
+        title: 'GUATEMALA Beans',
         price: 31000,
         img: guatemala,
-        qty: 342
+        qty: 342,
+        desc: 'Hampir semua referensi sepakat mengatakan bahwa kopi pertama kali ditemukan di Ethiopia, meskipun ada juga beberapa protes yang menyatakan bahwa Coffea arabica sebenarnya muncul pertama kali di bagian selatan Sudan. Karena para gembala Ethiopia adalah manusia pertama yang mengonsumsi kopi—walau saat itu mereka baru mengonsumsi buah/cherry-nya saja, maka gagasan tentang “Ethiopia sebagai tempat asal kopi” pun semakin kuat.'
     },
     {
         id: 3,
-        name: 'Hanami Latte',
+        title: 'NICARAGUA Beans',
         price: 29000,
         img: nicaragua,
-        qty: 423
+        qty: 423,
+        desc: 'Hampir semua referensi sepakat mengatakan bahwa kopi pertama kali ditemukan di Ethiopia, meskipun ada juga beberapa protes yang menyatakan bahwa Coffea arabica sebenarnya muncul pertama kali di bagian selatan Sudan. Karena para gembala Ethiopia adalah manusia pertama yang mengonsumsi kopi—walau saat itu mereka baru mengonsumsi buah/cherry-nya saja, maka gagasan tentang “Ethiopia sebagai tempat asal kopi” pun semakin kuat.'
     },
     {
         id: 4,
-        name: 'Clepon Coffee',
+        title: 'RWANDA Beans',
         price: 28000,
         img: rwanda,
-        qty: 234
+        qty: 234,
+        desc: 'Hampir semua referensi sepakat mengatakan bahwa kopi pertama kali ditemukan di Ethiopia, meskipun ada juga beberapa protes yang menyatakan bahwa Coffea arabica sebenarnya muncul pertama kali di bagian selatan Sudan. Karena para gembala Ethiopia adalah manusia pertama yang mengonsumsi kopi—walau saat itu mereka baru mengonsumsi buah/cherry-nya saja, maka gagasan tentang “Ethiopia sebagai tempat asal kopi” pun semakin kuat.'
     },
 ]
 

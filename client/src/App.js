@@ -11,7 +11,7 @@ function App() {
     <div className="container">
       <Routes>
         <Route path='/' element={isAdmin ? <IncomeTransaction/> : <Home/>}/>
-        <Route path='/product-detail' element={<ProductDetail/>}/>
+        <Route path='/product-detail/:id' element={<ProductDetail/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/add-product' element={<AddProduct/>}/>

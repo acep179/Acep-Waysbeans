@@ -29,7 +29,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
       <AuthModal />
 
@@ -38,15 +38,16 @@ function Home() {
       </header>
       <main className='mx-auto text-red' style={{ width: '92%' }}>
         <h4 className='mb-5'>Let's Order</h4>
+
         <div className='row'>
           {products.map((item) => {
             return (
               <div key={item.id} className='col-3 mb-5 px-3'>
                 <div className='card bg-pink p-0 cursor-pointer' onClick={() => detailProduct(item.id)}>
-                  <img src={item.img} className="card-img-top w-100 mb-2" alt={item.name} />
+                  <img src={item.img} className="card-img-top w-100 mb-2" alt={item.title} />
                   <div className="card-body">
                     <div>
-                      <h5 className="card-title mb-3 text-red">{item.name}</h5>
+                      <h5 className="card-title mb-3 text-red">{item.title}</h5>
                     </div>
                     <p className="card-text mb-2">{convertRupiah.convert(item.price)}</p>
                     <p className="card-text mb-2">Stock: {item.qty}</p>
@@ -56,9 +57,10 @@ function Home() {
             )
           })}
         </div>
+
       </main>
 
-    </div>
+    </>
   )
 }
 
