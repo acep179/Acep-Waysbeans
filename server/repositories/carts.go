@@ -20,14 +20,14 @@ func RepositoryCart(db *gorm.DB) *repository {
 
 func (r *repository) FindCarts() ([]models.Cart, error) {
 	var carts []models.Cart
-	err := r.db.Find(&carts).Error
+	err := r.db.Preload("User").Find(&carts).Error
 
 	return carts, err
 }
 
 func (r *repository) FindCartsByUserID(userID int) ([]models.Cart, error) {
 	var carts []models.Cart
-	err := r.db.Find(&carts, "user_id = ?", userID).Error
+	err := r.db.Preload("User").Find(&carts, "user_id = ?", userID).Error
 
 	return carts, err
 }
@@ -35,7 +35,7 @@ func (r *repository) FindCartsByUserID(userID int) ([]models.Cart, error) {
 func (r *repository) GetCart(ID int) (models.Cart, error) {
 	var cart models.Cart
 
-	err := r.db.First(&cart, ID).Error
+	err := r.db.Preload("User").First(&cart, ID).Error
 
 	return cart, err
 }
