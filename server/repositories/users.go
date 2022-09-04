@@ -1,0 +1,26 @@
+package repositories
+
+import (
+	"waysbeans/models"
+
+	"gorm.io/gorm"
+)
+
+type UserRepository interface {
+	FindUsers() ([]models.User, error)
+	// GetUser(ID int) (models.User, error)
+	// CreateUser(models.User) (models.User, error)
+	// UpdateUser(models.User) (models.User, error)
+	// DeleteUser(models.User) (models.User, error)
+}
+
+func RepositoryUser(db *gorm.DB) *repository {
+	return &repository{db}
+}
+
+func (r *repository) FindUsers() ([]models.User, error) {
+	var users []models.User
+	err := r.db.Find(&users).Error
+
+	return users, err
+}
