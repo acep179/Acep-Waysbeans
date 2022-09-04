@@ -8,7 +8,7 @@ import (
 
 type UserRepository interface {
 	FindUsers() ([]models.User, error)
-	// GetUser(ID int) (models.User, error)
+	GetUser(ID int) (models.User, error)
 	// CreateUser(models.User) (models.User, error)
 	// UpdateUser(models.User) (models.User, error)
 	// DeleteUser(models.User) (models.User, error)
@@ -23,4 +23,11 @@ func (r *repository) FindUsers() ([]models.User, error) {
 	err := r.db.Find(&users).Error
 
 	return users, err
+}
+
+func (r *repository) GetUser(ID int) (models.User, error) {
+	var user models.User
+	err := r.db.First(&user, ID).Error
+
+	return user, err
 }
