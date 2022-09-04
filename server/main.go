@@ -3,18 +3,20 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"waysbeans/database"
 	"waysbeans/pkg/mysql"
 	"waysbeans/routes"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	// errEnv := godotenv.Load()
-	// if errEnv != nil {
-	// 	panic("Failed to load env file")
-	// }
+	errEnv := godotenv.Load()
+	if errEnv != nil {
+		panic("Failed to load env file")
+	}
 
 	// //. initial DB
 	mysql.DatabaseInit()
@@ -28,8 +30,7 @@ func main() {
 
 	r.PathPrefix("/uploads").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads"))))
 
-	var port = "5000"
-	// os.Getenv("PORT")
+	var port = os.Getenv("PORT")
 
 	//. Setup allowed Header, Method, and Origin for CORS
 	// var AllowedHeaders = handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})

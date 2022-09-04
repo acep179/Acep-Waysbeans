@@ -74,7 +74,7 @@ func (h *handlerProfile) CreateProfile(w http.ResponseWriter, r *http.Request) {
 	userID, _ := strconv.Atoi(r.FormValue("userID"))
 
 	request := profiledto.ProfileRequest{
-		Image:    filename,
+		Img:      filename,
 		Phone:    r.FormValue("phone"),
 		Address:  r.FormValue("address"),
 		PostCode: r.FormValue("postCode"),
@@ -91,7 +91,7 @@ func (h *handlerProfile) CreateProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	profile := models.Profile{
-		Image:    request.Image,
+		Img:      request.Img,
 		Phone:    request.Phone,
 		Address:  request.Address,
 		PostCode: request.PostCode,
@@ -114,7 +114,7 @@ func (h *handlerProfile) CreateProfile(w http.ResponseWriter, r *http.Request) {
 func convertResponseProfile(u models.Profile) profiledto.ProfileResponse {
 	return profiledto.ProfileResponse{
 		ID:       u.ID,
-		Image:    u.Image,
+		Img:      u.Img,
 		Phone:    u.Phone,
 		Address:  u.Address,
 		PostCode: u.PostCode,
