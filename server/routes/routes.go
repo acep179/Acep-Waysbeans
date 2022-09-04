@@ -3,11 +3,11 @@ package routes
 import "github.com/gorilla/mux"
 
 func RouteInit(r *mux.Router) {
-	// AuthRoutes(r)
+	AuthRoutes(r)
 	UserRoutes(r)
+	ProfileRoutes(r)
 	// ProductRoutes(r)
 	// ToppingRoutes(r)
-	ProfileRoutes(r)
 	// CartRoutes(r)
 	// TransactionRoutes(r)
 }
