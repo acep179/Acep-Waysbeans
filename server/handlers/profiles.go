@@ -10,6 +10,7 @@ import (
 	"waysbeans/models"
 	"waysbeans/repositories"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
 )
 
@@ -63,56 +64,59 @@ func (h *handlerProfile) GetProfile(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-//. Create Profile
-// func (h *handlerProfile) CreateProfile(w http.ResponseWriter, r *http.Request) {
+// . Create Profile
+func (h *handlerProfile) CreateProfile(w http.ResponseWriter, r *http.Request) {
 
-// 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 
-// 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-// 	userId := int(userInfo["id"].(float64))
+	dataContex := r.Context().Value("dataFile")
+	filename := dataContex.(string)
+	userID, _ := strconv.Atoi(r.FormValue("userID"))
 
-// 	dataContex := r.Context().Value("dataFile")
-// 	filename := dataContex.(string)
+	request := profiledto.ProfileRequest{
+		Image:    filename,
+		Phone:    r.FormValue("phone"),
+		Address:  r.FormValue("address"),
+		PostCode: r.FormValue("postCode"),
+		UserID:   userID,
+	}
 
-// 	request := profiledto.ProfileRequest{
-// 		Image:   filename,
-// 		Phone:   r.FormValue("phone"),
-// 		Address: r.FormValue("address"),
-// 	}
+	validation := validator.New()
+	err := validation.Struct(request)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Status: http.StatusBadRequest, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+		return
+	}
 
-// 	validation := validator.New()
-// 	err := validation.Struct(request)
-// 	if err != nil {
-// 		w.WriteHeader(http.StatusBadRequest)
-// 		response := dto.ErrorResult{Status: http.StatusBadRequest, Message: err.Error()}
-// 		json.NewEncoder(w).Encode(response)
-// 		return
-// 	}
+	profile := models.Profile{
+		Image:    request.Image,
+		Phone:    request.Phone,
+		Address:  request.Address,
+		PostCode: request.PostCode,
+		UserID:   request.UserID,
+	}
 
-// 	profile := models.Profile{
-// 		Image:   request.Image,
-// 		Phone:   request.Phone,
-// 		Address: request.Address,
-// 		UserID:  userId,
-// 	}
+	data, err := h.ProfileRepository.CreateProfile(profile)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		response := dto.ErrorResult{Status: http.StatusInternalServerError, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+	}
 
-// 	data, err := h.ProfileRepository.CreateProfile(profile)
-// 	if err != nil {
-// 		w.WriteHeader(http.StatusInternalServerError)
-// 		response := dto.ErrorResult{Status: http.StatusInternalServerError, Message: err.Error()}
-// 		json.NewEncoder(w).Encode(response)
-// 	}
-
-// 	w.WriteHeader(http.StatusOK)
-// 	response := dto.SuccessResult{Status: http.StatusOK, Data: convertResponseProfile(data)}
-// 	json.NewEncoder(w).Encode(response)
-// }
+	w.WriteHeader(http.StatusOK)
+	response := dto.SuccessResult{Status: http.StatusOK, Data: convertResponseProfile(data)}
+	json.NewEncoder(w).Encode(response)
+}
 
 // . convertResponseProfile function
 func convertResponseProfile(u models.Profile) profiledto.ProfileResponse {
 	return profiledto.ProfileResponse{
-		ID:      u.ID,
-		Phone:   u.Phone,
-		Address: u.Address,
+		ID:       u.ID,
+		Image:    u.Image,
+		Phone:    u.Phone,
+		Address:  u.Address,
+		PostCode: u.PostCode,
 	}
 }

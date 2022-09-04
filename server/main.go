@@ -26,7 +26,7 @@ func main() {
 
 	routes.RouteInit(r.PathPrefix("/api/v1").Subrouter())
 
-	// r.PathPrefix("/uploads").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads"))))
+	r.PathPrefix("/uploads").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads"))))
 
 	var port = "5000"
 	// os.Getenv("PORT")
