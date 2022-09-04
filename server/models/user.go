@@ -15,12 +15,13 @@ type User struct {
 }
 
 type UserResponseRelation struct {
-	FullName string `json:"fullName"`
+	ID       int    `json:"id"`
+	FullName string `json:"fullName" gorm:"column:full_name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Status   string `json:"status"`
 }
 
 func (UserResponseRelation) TableName() string {
-	return "profiles"
+	return "users"
 }
