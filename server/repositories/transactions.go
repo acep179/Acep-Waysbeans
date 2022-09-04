@@ -20,7 +20,7 @@ func RepositoryTransaction(db *gorm.DB) *repository {
 
 func (r *repository) FindTransactions() ([]models.Transaction, error) {
 	var transactions []models.Transaction
-	err := r.db.Find(&transactions).Error
+	err := r.db.Preload("Buyer").Find(&transactions).Error
 
 	return transactions, err
 }
@@ -35,7 +35,7 @@ func (r *repository) GetTransactionMatch(ID int) (models.Transaction, error) {
 // GetOneTransaction method here ...
 func (r *repository) GetOneTransaction(ID string) (models.Transaction, error) {
 	var transaction models.Transaction
-	err := r.db.First(&transaction, ID).Error
+	err := r.db.Preload("Buyer").First(&transaction, ID).Error
 
 	return transaction, err
 }
