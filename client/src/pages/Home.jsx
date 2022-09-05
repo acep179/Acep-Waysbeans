@@ -3,22 +3,24 @@ import convertRupiah from 'rupiah-format'
 
 import { Navbar, AuthModal } from '../components'
 
-import { products } from '../fakeData'
-
 import heroBg from './../assets/jumbotron.png'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
+import { API } from '../config/api'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 function Home() {
 
   const [state] = useContext(UserContext)
   const navigate = useNavigate()
+  const [products, setProducts] = useState([])
 
   //. Fetching product data from database
-  // let { data: products } = useQuery('productsCache', async () => {
-  //   const response = await API.get('/products');
-  //   return response.data.data
-  // });
+  const getProductsData = async () => {
+    const response = await API.get('/products');
+    setProducts(response.data.data)
+  }
 
   const detailProduct = (productID) => {
     const loginButton = document.getElementById("loginButton")
@@ -28,6 +30,10 @@ function Home() {
       loginButton.click()
     }
   }
+
+  useEffect(() => {
+    getProductsData()
+  }, [])
 
   return (
     <>
