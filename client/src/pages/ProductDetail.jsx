@@ -7,6 +7,7 @@ import { Navbar } from './../components'
 import { API } from '../config/api';
 
 import { useState } from 'react';
+import { useMutation } from 'react-query';
 
 function ProductDetail() {
 
@@ -16,15 +17,33 @@ function ProductDetail() {
 
   const getProductData = async () => {
     const response = await API.get(`/product/${id}`);
-    console.log(response.data.data)
     setProduct(response.data.data)
   }
 
-  const handleOnClick = (e) => {
-    e.preventDefault()
+  const handleOnClick = useMutation(async (e) => {
+    try {
+      e.preventDefault()
 
-    navigate("/cart")
-  }
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+
+      const cartData = {
+        productID: product.id,
+      }
+
+      const body = JSON.stringify(cartData);
+      await API.post('/cart', body, config);
+
+      navigate("/cart")
+    } catch (error) {
+      console.log(error);
+    }
+
+  })
+
 
   useEffect(() => {
     getProductData()
@@ -43,7 +62,7 @@ function ProductDetail() {
             <p className='mb-5 fs-4 fw-bold text-end'>{convertRupiah.convert(product.price)}</p>
 
             <div className='d-grid gap-2'>
-              <button onClick={(e) => handleOnClick(e)} className='btn btn-red d-grid gap-2'>Add Cart</button>
+              <button onClick={(e) => handleOnClick.mutate(e)} className='btn btn-red d-grid gap-2'>Add Cart</button>
             </div>
           </div>
         </div>

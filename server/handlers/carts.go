@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"strconv"
 	cartsdto "waysbeans/dto/carts"
 	dto "waysbeans/dto/result"
@@ -53,6 +54,10 @@ func (h *handlerCart) FindCartsByUserID(w http.ResponseWriter, r *http.Request) 
 		response := dto.ErrorResult{Status: http.StatusBadRequest, Message: err.Error()}
 		json.NewEncoder(w).Encode(response)
 		return
+	}
+
+	for i, p := range carts {
+		carts[i].Product.Img = os.Getenv("PATH_FILE") + p.Product.Img
 	}
 
 	w.WriteHeader(http.StatusOK)

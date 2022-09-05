@@ -7,11 +7,20 @@ import bin from './../assets/bin.png'
 // import { API } from '../config/api';
 import { Navbar } from './../components'
 
-import { carts } from '../fakeData'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { API } from '../config/api'
 
 function Cart() {
 
   const navigate = useNavigate()
+  const [carts, setCarts] = useState([])
+
+  const getCartsData = async () => {
+    const response = await API.get(`/carts-userid`);
+    console.log(response.data.data)
+    setCarts(response.data.data)
+  }
 
   const totalAmount = (array) => {
     let sum = 0;
@@ -39,6 +48,10 @@ function Cart() {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    getCartsData()
+  }, [])
 
   return (
     <div className='container d-flex justify-content-center'>

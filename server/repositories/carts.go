@@ -27,7 +27,7 @@ func (r *repository) FindCarts() ([]models.Cart, error) {
 
 func (r *repository) FindCartsByUserID(userID int) ([]models.Cart, error) {
 	var carts []models.Cart
-	err := r.db.Preload("User").Find(&carts, "user_id = ?", userID).Error
+	err := r.db.Preload("Product").Preload("User").Find(&carts, "user_id = ?", userID).Error
 
 	return carts, err
 }
