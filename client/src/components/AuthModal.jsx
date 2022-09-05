@@ -92,9 +92,7 @@ function AuthModal() {
       };
 
       const body = JSON.stringify(formRegister);
-      const response = await API.post('/register', body, config);
-
-      console.log(response)
+      await API.post('/register', body, config);
 
       toggleModal.click()
 

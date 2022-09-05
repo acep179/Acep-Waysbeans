@@ -1,9 +1,6 @@
 import React, { useContext } from 'react'
 import { Navbar, TransactionCard } from './../components'
 import { UserContext } from '../context/userContext'
-// import { useQuery } from 'react-query';
-// import { API } from '../config/api';
-import userPhoto from './../assets/user_photo.png'
 import { transactions } from '../fakeData'
 
 function Profile() {
@@ -27,7 +24,7 @@ function Profile() {
         <div className='col-5'>
           <h3 className='text-red mb-4'>My Profile</h3>
           <div className='row'>
-            <img className='col-5' src={state.user.profile.img ? state.user.profile.img : userPhoto} alt={state.user.fullName} />
+            <img className='col-5' src={state.user.profile.img} alt={state.user.fullName} />
             <div className='col-6'>
               <h5 className='mb-2 text-brown'>Full Name</h5>
               <p>{state.user.fullName}</p>

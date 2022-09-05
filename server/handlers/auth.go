@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 	authdto "waysbeans/dto/auth"
 	dto "waysbeans/dto/result"
@@ -75,6 +76,7 @@ func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
 	//. create nil profile column
 	profile := models.Profile{
 		UserID: data.ID,
+		Img:    "userIcon.png",
 	}
 	h.AuthRepository.CreateNilProfile(profile)
 
@@ -113,7 +115,7 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// user.Profile.Image = os.Getenv("PATH_FILE") + user.Profile.Image
+	user.Profile.Img = (os.Getenv("PATH_FILE") + user.Profile.Img)
 
 	//. For Check password
 	isValid := bcrypt.CheckPasswordHash(request.Password, user.Password)
@@ -143,6 +145,7 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 		Email:    user.Email,
 		Status:   user.Status,
 		Token:    token,
+		Profile:  user.Profile,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -166,13 +169,14 @@ func (h *handlerAuth) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// user.Profile.Image = os.Getenv("PATH_FILE") + user.Profile.Image
+	user.Profile.Img = os.Getenv("PATH_FILE") + user.Profile.Img
 
 	CheckAuthResponse := authdto.CheckAuthResponse{
 		ID:       user.ID,
 		FullName: user.FullName,
 		Email:    user.Email,
 		Status:   user.Status,
+		Profile:  user.Profile,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
