@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import convertRupiah from 'rupiah-format'
 
 import { Navbar, AuthModal } from '../components'
@@ -7,10 +7,11 @@ import { products } from '../fakeData'
 
 import heroBg from './../assets/jumbotron.png'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/userContext'
 
 function Home() {
 
-  // const [state] = useContext(UserContext)
+  const [state] = useContext(UserContext)
   const navigate = useNavigate()
 
   //. Fetching product data from database
@@ -20,12 +21,12 @@ function Home() {
   // });
 
   const detailProduct = (productID) => {
-    // const loginButton = document.getElementById("loginButton")
-    //   if (state.isLogin === true) {
-    navigate(`/product-detail/${productID}`)
-    //   } else {
-    // loginButton.click()
-    //   }
+    const loginButton = document.getElementById("loginButton")
+    if (state.isLogin === true) {
+      navigate(`/product-detail/${productID}`)
+    } else {
+      loginButton.click()
+    }
   }
 
   return (

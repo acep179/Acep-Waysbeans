@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useMutation } from 'react-query';
+import { UserContext } from '../context/userContext';
+import { API } from '../config/api';
 
 function AuthModal() {
 
-  // const [, dispatch] = useContext(UserContext)
+  const [, dispatch] = useContext(UserContext)
   const [message, setMessage] = useState(null)
 
   //. Login 
@@ -20,31 +23,31 @@ function AuthModal() {
 
   const { loginEmail, loginPassword } = formLogin;
 
-  const handleSubmitLogin = (e) => {
-    // useMutation(async 
+  const handleSubmitLogin = useMutation(async (e) => {
+
     try {
       e.preventDefault()
       const closeModal = document.getElementById('closeModal')
 
 
-      // const config = {
-      //   headers: {
-      //     'Content-type': 'application/json',
-      //   },
-      // };
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
 
-      // const body = JSON.stringify(formLogin);
-      // const response = await API.post('/login', body, config);
+      const body = JSON.stringify(formLogin);
+      const response = await API.post('/login', body, config);
 
-      // if (response?.status === 200) {
+      if (response.status === 200) {
 
-      //   dispatch({
-      //     type: 'LOGIN_SUCCESS',
-      //     payload: response.data.data,
-      //   });
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: response.data.data,
+        });
 
-      closeModal.click()
-      // }
+        closeModal.click()
+      }
 
     } catch (error) {
       const alert = (
@@ -55,7 +58,7 @@ function AuthModal() {
       setMessage(alert);
     }
 
-  }
+  })
 
 
   //. Register 
@@ -75,23 +78,23 @@ function AuthModal() {
 
   const { registerName, registerEmail, registerPassword } = formRegister
 
-  const handleSubmitRegister = (e) => {
-    // useMutation(async
+  const handleSubmitRegister = useMutation(async (e) => {
+
     try {
       const toggleModal = document.getElementById("toggleModal")
 
       e.preventDefault();
 
-      // const config = {
-      //   headers: {
-      //     'Content-type': 'application/json',
-      //   },
-      // };
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
 
-      // const body = JSON.stringify(formRegister);
-      // const response = await API.post('/register', body, config);
+      const body = JSON.stringify(formRegister);
+      const response = await API.post('/register', body, config);
 
-      // console.log(response)
+      console.log(response)
 
       toggleModal.click()
 
@@ -111,7 +114,7 @@ function AuthModal() {
       setMessage(alert);
       console.log(error);
     }
-  }
+  })
 
   return (
     <div>

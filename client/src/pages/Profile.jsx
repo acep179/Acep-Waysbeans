@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navbar, TransactionCard } from './../components'
-// import { UserContext } from '../context/userContext'
+import { UserContext } from '../context/userContext'
 // import { useQuery } from 'react-query';
 // import { API } from '../config/api';
 import userPhoto from './../assets/user_photo.png'
-import { users, transactions } from '../fakeData'
+import { transactions } from '../fakeData'
 
 function Profile() {
+
+  const [state] = useContext(UserContext)
+  console.log(state)
+
+  // let { data: transactionData } = useQuery('transactionsCache', async () => {
+  //   const response = await API.get('/transactions');
+  //   return response.data.data
+  // });
+
+  // let transactions = transactionData?.filter((item) => {
+  //   return Number(item.buyer_id) === Number(state.user.id)
+  // })
+
   return (
     <div className='container d-flex justify-content-center'>
       <Navbar />
@@ -14,12 +27,12 @@ function Profile() {
         <div className='col-5'>
           <h3 className='text-red mb-4'>My Profile</h3>
           <div className='row'>
-            <img className='col-5' src={users[0].profile.image ? users[0].profile.image : userPhoto} alt={users[0].fullName} />
+            <img className='col-5' src={state.user.profile.img ? state.user.profile.img : userPhoto} alt={state.user.fullName} />
             <div className='col-6'>
               <h5 className='mb-2 text-brown'>Full Name</h5>
-              <p>{users[0].fullName}</p>
+              <p>{state.user.fullName}</p>
               <h5 className='text-brown'>Email</h5>
-              <p>{users[0].email}</p>
+              <p>{state.user.email}</p>
             </div>
           </div>
         </div>

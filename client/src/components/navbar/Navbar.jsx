@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import AdminMenu from './AdminMenu'
@@ -6,14 +6,18 @@ import CustomerMenu from './CustomerMenu'
 import LogoutMenu from './LogoutMenu'
 
 import logo from "../../assets/waysbean_logo.png"
+import { UserContext } from '../../context/userContext'
 
 function Navbar() {
 
-  let [isLogin, setIsLogin] = useState(false)
-  let [isAdmin] = useState(false)
+  const [state, dispatch] = useContext(UserContext)
+  let isLogin = state.isLogin
+  let isAdmin = state.user.status === "admin" ? true : false
 
-  let logout = () => {
-    setIsLogin(false)
+  const logout = () => {
+    dispatch({
+      type: 'LOGOUT'
+    })
   }
 
   return (
