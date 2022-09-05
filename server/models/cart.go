@@ -13,14 +13,3 @@ type Cart struct {
 	CreatedAt     time.Time               `json:"-" gorm:"column:created_at"`
 	UpdatedAt     time.Time               `json:"updatedAt" gorm:"column:updated_at"`
 }
-
-type CartResponseRelation struct {
-	Qty           int                     `json:"qty"`
-	ProductID     int                     `json:"prouductID"`
-	Product       ProductResponseRelation `json:"product" gorm:"foreignKey:ProductID"`
-	TransactionID *int                    `json:"transactionID"`
-}
-
-func (CartResponseRelation) TableName() string {
-	return "carts"
-}

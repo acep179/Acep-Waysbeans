@@ -182,7 +182,9 @@ func convertCartResponse(u models.Cart) cartsdto.CartResponse {
 		ID:            u.ID,
 		Qty:           u.Qty,
 		UserID:        u.UserID,
+		User:          u.User,
 		ProductID:     u.ProductID,
+		Product:       u.Product,
 		TransactionID: u.TransactionID,
 	}
 }
