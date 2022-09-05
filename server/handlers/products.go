@@ -80,11 +80,11 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	filename := dataContex.(string)
 
 	price, _ := strconv.Atoi(r.FormValue("price"))
-	qty, _ := strconv.Atoi(r.FormValue("qty"))
+	stock, _ := strconv.Atoi(r.FormValue("stock"))
 	request := productsdto.CreateProductRequest{
 		Title: r.FormValue("title"),
 		Price: price,
-		Qty:   qty,
+		Stock: stock,
 		Img:   filename,
 		Desc:  r.FormValue("desc"),
 	}
@@ -101,7 +101,7 @@ func (h *handlerProduct) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	product := models.Product{
 		Title:  request.Title,
 		Price:  request.Price,
-		Qty:    request.Qty,
+		Stock:  request.Stock,
 		Img:    request.Img,
 		Desc:   request.Desc,
 		UserID: userId,
@@ -156,8 +156,8 @@ func (h *handlerProduct) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		product.Price = request.Price
 	}
 
-	if request.Qty > 0 {
-		product.Qty = request.Qty
+	if request.Stock > 0 {
+		product.Stock = request.Stock
 	}
 
 	if len(request.Img) > 0 {
@@ -212,7 +212,7 @@ func convertProductsResponse(u models.Product) productsdto.ProductResponse {
 		ID:     u.ID,
 		Title:  u.Title,
 		Price:  u.Price,
-		Qty:    u.Qty,
+		Stock:  u.Stock,
 		Img:    u.Img,
 		Desc:   u.Desc,
 		UserID: u.UserID,

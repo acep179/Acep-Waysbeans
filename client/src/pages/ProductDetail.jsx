@@ -44,7 +44,6 @@ function ProductDetail() {
 
   })
 
-
   useEffect(() => {
     getProductData()
   }, [])
@@ -57,7 +56,7 @@ function ProductDetail() {
           <img className='col-5 me-3' src={product.img} alt={product.title} />
           <div className='col-6 ms-3 text-red'>
             <h1 className='fw-bolder'>{product.title}</h1>
-            <p className='mb-5'>Stock: {product.qty}</p>
+            <p className='mb-5'>Stock: {product.stock}</p>
             <p style={{ textAlign: 'justify' }}>{product.desc}</p>
             <p className='mb-5 fs-4 fw-bold text-end'>{convertRupiah.convert(product.price)}</p>
 

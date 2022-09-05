@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import convertRupiah from 'rupiah-format'
 
 import { Navbar } from '../components'
-
-import { products } from '../fakeData'
+import { API } from '../config/api'
 
 function ListProducts() {
+
+  const [products, setProducts] = useState([])
+
+  //. Fetching product data from database
+  const getProductsData = async () => {
+    const response = await API.get('/products');
+    setProducts(response.data.data)
+  }
+
+  useEffect(() => {
+    getProductsData()
+  }, [])
+
   return (
     <>
       <Navbar />

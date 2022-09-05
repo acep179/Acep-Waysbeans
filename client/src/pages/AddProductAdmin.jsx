@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from "../components";
+import { API } from '../config/api';
 import clip from './../assets/clip.png';
 // import { useMutation } from 'react-query';
 // import { API } from '../config/api';
@@ -8,6 +11,7 @@ import kopi from './../assets/question.png'
 
 function AddProductAdmin() {
 
+  const navigate = useNavigate()
   const [preview, setPreview] = useState(null);
   const [previewName, setPreviewName] = useState("");
 
@@ -16,7 +20,7 @@ function AddProductAdmin() {
     stock: '',
     price: '',
     desc: '',
-    image: '',
+    img: '',
   });
 
   const handleChange = (e) => {
@@ -36,37 +40,40 @@ function AddProductAdmin() {
   };
 
   // Create function for handle insert product data with useMutation here ...
-  const handleOnSubmit = (e) => {
-    // useMutation(async
+  const handleOnSubmit = useMutation(async (e) => {
+
     try {
       e.preventDefault();
 
       // Configuration
-      // const config = {
-      //   headers: {
-      //     'Content-type': 'multipart/form-data',
-      //   },
-      // };
+      const config = {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      };
 
-      // // Store data with FormData as object
-      // const formData = new FormData();
-      // formData.set('image', form.image[0], form.image[0].name);
-      // formData.set('title', form.title);
-      // formData.set('price', form.price);
+      // Store data with FormData as object
+      const formData = new FormData();
+      formData.set('title', form.title);
+      formData.set('price', form.price);
+      formData.set('stock', form.stock);
+      formData.set('img', form.img[0], form.img[0].name);
+      formData.set('desc', form.desc);
 
-      // console.log(form)
+      console.log(form)
 
-      // // Insert product data
-      // const response = await API.post('/product', formData, config);
-      // // setForm(response.data)
-      // console.log(response)
+      // Insert product data
+      const response = await API.post('/product', formData, config);
+      // setForm(response.data)
+      console.log(response)
 
       alert('Produk berhasil ditambahkan!')
+      navigate("/list-products")
 
     } catch (error) {
       console.log(error);
     }
-  }
+  })
 
   return (
     <div className='container d-flex justify-content-center mb-5'>
@@ -99,7 +106,7 @@ function AddProductAdmin() {
               <textarea className="form-control input-red mb-4" name='desc' placeholder="Description" rows={5} onChange={handleChange}></textarea>
 
               <div className="w-50 mb-5">
-                <input type="file" className="form-control input-file-red" id="inputGroupFile02" name='image' onChange={handleChange} />
+                <input type="file" className="form-control input-file-red" id="inputGroupFile02" name='img' onChange={handleChange} />
                 <label className="form-control label-file" htmlFor="inputGroupFile02">
                   <p className='m-0'> {previewName === "" ? "Photo" : previewName}</p>
                   <img style={{ height: 20 }} src={clip} alt="clip" />

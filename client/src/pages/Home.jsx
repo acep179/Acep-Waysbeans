@@ -57,7 +57,7 @@ function Home() {
                       <h5 className="card-title mb-3 text-red">{item.title}</h5>
                     </div>
                     <p className="card-text mb-2">{convertRupiah.convert(item.price)}</p>
-                    <p className="card-text mb-2">Stock: {item.qty}</p>
+                    <p className="card-text mb-2">Stock: {item.stock}</p>
                   </div>
                 </div>
               </div>
