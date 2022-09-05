@@ -8,6 +8,8 @@ import (
 	"waysbeans/pkg/mysql"
 	"waysbeans/routes"
 
+	"github.com/gorilla/handlers"
+
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -33,13 +35,12 @@ func main() {
 	var port = os.Getenv("PORT")
 
 	//. Setup allowed Header, Method, and Origin for CORS
-	// var AllowedHeaders = handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
-	// var AllowedMethods = handlers.AllowedMethods([]string{"GET", "POST", "HEAD", "OPTIONS", "PATCH", "DELETE"})
-	// var AllowedOrigins = handlers.AllowedOrigins([]string{"*"})
+	var AllowedHeaders = handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+	var AllowedMethods = handlers.AllowedMethods([]string{"GET", "POST", "HEAD", "OPTIONS", "PATCH", "DELETE"})
+	var AllowedOrigins = handlers.AllowedOrigins([]string{"*"})
 
 	fmt.Println("server running localhost:" + port)
 
 	//. Embed the setup allowed in 2 parameter
-	http.ListenAndServe("localhost:"+port, r)
-	// handlers.CORS(AllowedHeaders, AllowedMethods, AllowedOrigins)(r)
+	http.ListenAndServe("localhost:"+port, handlers.CORS(AllowedHeaders, AllowedMethods, AllowedOrigins)(r))
 }
